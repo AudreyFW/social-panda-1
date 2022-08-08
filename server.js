@@ -1,5 +1,6 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
+const path = require('path');
 
 const userRoutes = require('./routes/user.routes');
 const postRoutes = require('./routes/post.routes');
@@ -44,6 +45,15 @@ app.get('/jwtid', requireAuth, (req, res)=>{
 //routes
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
+
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, './client/build')));
+
+    app.get('*', function(req, res) {
+        res.sendFile(path.join(__dirname, './client/build', 'index.html'));
+    });
+}
 
 app.listen(process.env.PORT, ()=>{
     console.log(`Listening on port ${process.env.PORT}`);

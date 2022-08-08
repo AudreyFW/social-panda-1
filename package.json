@@ -7,7 +7,9 @@
     "node": "16.x"
   },
   "scripts": {
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "cd client/src && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
