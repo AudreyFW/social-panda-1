@@ -4,7 +4,7 @@ mongoose
   .connect(
     "mongodb+srv://" +
       process.env.DB_USER_PASS +
-      "@cluster0.ojnc7.mongodb.net/panda-project"
+      process.env.DB_NAME
   )
   .then(() => {
     console.log("Connecting to mongoDB");
