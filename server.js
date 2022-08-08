@@ -33,15 +33,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(fileUpload());
 
-//ajout 4.08 pour déployement ?
-const path = require("path");
-app.use(express.static(path.resolve(__dirname, "./client/build")));
-app.get("*", function (request, response) {
-    response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-  });
-
-
-
 //jwt
 app.get('*', checkUser);
 app.get('/jwtid', requireAuth, (req, res)=>{
