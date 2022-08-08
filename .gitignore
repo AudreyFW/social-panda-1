@@ -1,3 +1,2 @@
-/node-modules
+node-modules
 /config/.env
-node_modules
