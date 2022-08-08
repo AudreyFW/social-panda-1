@@ -45,7 +45,6 @@ app.get('/jwtid', requireAuth, (req, res)=>{
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
 
-const port = process.env.PORT ? process.env.PORT : 5000;
-app.listen(port, ()=>{
-    console.log(`Listening on port ${port}`);
+app.listen(process.env.PORT, ()=>{
+    console.log(`Listening on port ${process.env.PORT}`);
 });
