@@ -25,8 +25,16 @@ const corsOptions={
         'preflightContinue': false
 }
 
-app.use(cors(corsOptions));
+//add it : 8.08
+const port = process.env.PORT || 5000;
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV ===  'staging') {
+    app.use(express.static('client/build'));
+    app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+    });
+   }
 
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -43,7 +51,7 @@ app.get('/jwtid', requireAuth, (req, res)=>{
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
 
-//server
-app.listen(process.env.PORT, ()=>{
+//server, changement de process.env.PORT à port
+app.listen(port, ()=>{
     console.log(`Listening on port ${process.env.PORT}`);
 });
